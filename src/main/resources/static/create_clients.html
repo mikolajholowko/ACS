@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>ClientForm</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+    <form id="client-form">
+        <label for="client-firstname"></label><input type="text" placeholder="Imię" id="client-firstname">
+        <label for="client-lastname"></label><input type="text" placeholder="Nazwisko" id="client-lastname">
+        <label for="client-email"></label><input type="email" placeholder="Email" id="client-email">
+        <label for="client-birthdate"></label><input placeholder="Data urodzenia" type="date" id="client-birthdate">
+
+        <div class="declinebutton">
+            <div class="button btn-one">
+                <a href="admin.html"><span>Anuluj</span> </a>
+            </div>
+        </div>
+
+        <div class="acceptbutton">
+            <div class="button btn-one">
+                <span onclick="createClient()">Zatwierdź</span>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="js/clientAPI.js"></script>
+</body>
+</html>
