@@ -20,9 +20,9 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -59,6 +59,7 @@ public class QrService {
     public Qr generateQrCodeForEmployee(EmployeeDto employeeDto) {
         ByteArrayOutputStream stream;
         long timestamp = System.currentTimeMillis();
+
         try {
             stream = QRCode
                     .from(objectMapper.writeValueAsString(new QrDto(employeeDto.getId(), timestamp)))
@@ -73,6 +74,8 @@ public class QrService {
 
         return qrRespository.save(new Qr(stream.toByteArray(), timestamp, Employee.mapToEntity(employeeDto)));
     }
+
+
 
     public Qr mapToEntity(QrDto qrDto) {
         Employee employee;
@@ -89,5 +92,30 @@ public class QrService {
         return qr;
     }
 
+    private LocalDateTime getDateTimeFromTimestamp(long timestamp) {
+        if (timestamp == 0)
+            return null;
+        return LocalDateTime.ofInstant(Instant.ofEpochSecond(timestamp), TimeZone
+                .getDefault().toZoneId());
+    }
 
+    //TODO return proper object instead of int
+    public int qrValidation(QrDto qrDto) {
+        boolean isValidCode = (getDateTimeFromTimestamp(qrDto.getTimestamp())).isBefore(LocalDateTime.now().minusDays(1));
+        System.out.println(isValidCode);
+        if (isValidCode) {
+            EmployeeDto employeeDto = employeeService.getById(qrDto.getEmployeeId());
+            if (!Objects.isNull(employeeDto) && employeeDto.getId() == qrDto.getEmployeeId()) {
+                if (Role.valueOf(qrDto.getRole()).getValue() >= employeeDto.getRole().getValue()) {
+                    return 200;
+                } else {
+                    return 401;
+                }
+            } else {
+                return 404;
+            }
+        } else {
+            return 404;
+        }
+    }
 }

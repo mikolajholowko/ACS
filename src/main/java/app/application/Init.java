@@ -12,6 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -25,6 +28,8 @@ public class Init implements InitializingBean {
     private final QrService qrService;
     private final EmployeeRepository employeeService;
     private final QrRespository qrRespository;
+    private final CipherService cipherService;
+
 
     @Override
     public void afterPropertiesSet() {
@@ -44,7 +49,30 @@ public class Init implements InitializingBean {
             throw new RuntimeException(e);
         }
 
-
     }
+
+//    public void cipherJWTValue() throws NoSuchAlgorithmException, FileNotFoundException {
+//        KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
+//        generator.initialize(2048);
+//        KeyPair pair = generator.generateKeyPair();
+//
+//
+//        PrivateKey privateKey = pair.getPrivate();
+//        PublicKey publicKey = pair.getPublic();
+//
+//
+//
+//        System.out.println(Arrays.toString(privateKey.getEncoded()));
+//        System.out.println(Arrays.toString(publicKey.getEncoded()));
+//
+//        try (FileOutputStream fos = new FileOutputStream("public.txt"))  {
+//            fos.write(publicKey.getEncoded());
+//           // fos.write(privateKey.getEncoded());
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//    }
+
 
 }

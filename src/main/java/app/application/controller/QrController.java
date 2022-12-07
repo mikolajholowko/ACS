@@ -58,7 +58,7 @@ public class QrController {
 //                .body(inputStream);
 //
 //    }
-
+//
 //    @GetMapping(value = "/png", produces = MediaType.IMAGE_JPEG_VALUE)
 //    public ResponseEntity<Resource> image() throws IOException {
 //        final ByteArrayResource inputStream = new ByteArrayResource(Files.readAllBytes(Paths.get(
@@ -70,5 +70,11 @@ public class QrController {
 //                .body(inputStream);
 //
 //    }
+
+    @GetMapping(value = "/api/v1/validate-code")
+    public ResponseEntity<Integer> validateCode(@RequestBody QrDto qrDto) {
+        System.out.println(qrDto);
+        return ResponseEntity.status(qrService.qrValidation(qrDto)).body(qrService.qrValidation(qrDto));
+    }
 
 }

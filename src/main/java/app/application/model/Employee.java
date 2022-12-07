@@ -42,7 +42,8 @@ public class Employee {
     private Role role;
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     Set<Entrance> entrances;
-    @OneToOne(cascade = CascadeType.PERSIST)
+
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "qr_id", referencedColumnName = "id")
     private Qr qr;
 
