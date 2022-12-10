@@ -5,9 +5,9 @@ import app.application.model.Employee;
 import app.application.model.Qr;
 import app.application.model.dto.EmployeeDto;
 import app.application.model.dto.QrDto;
+import app.application.model.dto.Role;
 import app.application.repository.EmployeeRepository;
 import app.application.repository.QrRespository;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import net.glxn.qrgen.javase.QRCode;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -31,8 +30,6 @@ public class QrService {
     private final QrRespository qrRespository;
     private final ObjectMapper objectMapper;
     private final EmployeeRepository employeeRepository;
-
-
     private final EmployeeService employeeService;
 
     public QrDto getById(UUID id) {

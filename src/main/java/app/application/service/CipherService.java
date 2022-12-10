@@ -69,7 +69,7 @@ public class CipherService {
 
     public PrivateKey readPrivateKey() throws NoSuchAlgorithmException, IOException, InvalidKeySpecException {
         File privateKey = new File("private.key");
-        byte[] privateKeyBytes = Files.readAllBytes(privateKey.toPath());
+        byte[] privateKeyBytes = DatatypeConverter.parseHexBinary(Files.readString(privateKey.toPath()));
 
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         EncodedKeySpec privateKeySpec = new PKCS8EncodedKeySpec(privateKeyBytes);
