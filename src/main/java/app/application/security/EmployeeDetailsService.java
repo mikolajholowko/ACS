@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class EmployeeService implements UserDetailsService {
+public class EmployeeDetailsService implements UserDetailsService {
 
     private final EmployeeRepository employeeRepository;
 
@@ -20,7 +20,7 @@ public class EmployeeService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Employee> employee = employeeRepository.findByName(username);
+        Optional<Employee> employee = employeeRepository.findByLogin(username);
 
         employee.orElseThrow(() -> new UsernameNotFoundException("Not found" +  username));
 

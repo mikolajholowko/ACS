@@ -1,7 +1,9 @@
 package app.application.security;
 
 
-import app.application.security.models.Employee;
+import app.application.model.Employee;
+import app.application.model.dto.Role;
+import org.springframework.context.support.BeanDefinitionDsl;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,11 +20,10 @@ public class EmployeesDetails implements UserDetails {
     List<GrantedAuthority> role;
 
     public EmployeesDetails(Employee employee) {
-        this.username = employee.getName();
-        this.password = employee.getPass();
-        this.role = Arrays.stream(
-                employee.getRole().split(","))
-                .map(SimpleGrantedAuthority::new)
+        this.username = employee.getLogin();
+        this.password = employee.getPassword();
+        this.role = Arrays.stream(Role.values())
+                .map(e -> new SimpleGrantedAuthority(e.name()))
                 .collect(Collectors.toList());
     }
 
