@@ -23,4 +23,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
     @Override
     void delete(Employee entity);
 
+
+    Optional<Employee> findByLogin(String login);
 }
