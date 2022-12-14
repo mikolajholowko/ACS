@@ -2,6 +2,7 @@ package app.application.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Service;
@@ -16,15 +17,13 @@ import java.nio.file.Files;
 import java.security.*;
 import java.security.spec.EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.Arrays;
 import java.util.Base64;
 
 @Service
+@Slf4j
 public class BaeldungCipherService {
 
-    @Value("${QRACS.private.key}")
-    private String privateKey;
-    @Value("${QRACS.public.key}")
-    private String publicKey;
 
     @SneakyThrows
     public void rsa() {
@@ -52,6 +51,9 @@ public class BaeldungCipherService {
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(publicKeyBytes);
         keyFactory.generatePublic(publicKeySpec);
+
+        log.info(Arrays.toString(privateKey.getEncoded()));
+        log.info(Arrays.toString(publicKey.getEncoded()));
 
         String secretMessage = "Baeldung secret message ";
 

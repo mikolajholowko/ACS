@@ -30,13 +30,6 @@ import java.util.Base64;
 
 public class CipherService {
 
-    private final ObjectMapper objectMapper;
-    @Value("${QRACS.private.key}")
-    private String privateKey;
-    @Value("${QRACS.public.key}")
-    private String publicKey;
-
-
     public String encode(String messageToEncode) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException, IOException {
 
         Cipher encryptCipher = Cipher.getInstance("RSA");
