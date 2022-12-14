@@ -40,7 +40,8 @@ public class Employee {
     private String password;
     private String email;
     private Role role;
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     Set<Entrance> entrances;
 
     @OneToOne(cascade = CascadeType.ALL)

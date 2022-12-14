@@ -13,6 +13,7 @@ public class QrDto {
     private UUID id;
     private UUID employeeId;
     private long timestamp;
+    private String role;
 
     @Override
     public String toString() {
