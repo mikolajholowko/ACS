@@ -1,0 +1,187 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.containter{
+    width: 100%;
+    min-height: 100vh;
+    padding-left: 8%;
+    padding-right: 8%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.navbar{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.logo{
+    width: 50px;
+    cursor: pointer;
+    margin: 30px 0;
+}
+
+.menuic{
+   width: 25px;
+   cursor: pointer; 
+   display: none;
+}
+
+nav{
+    flex: 1;
+    text-align: right;
+}
+
+nav ul li{
+   list-style: none;
+   display: inline-block;
+   margin-right: 30px;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+}
+
+nav ul li a:hover{
+    color: #56cf46
+}
+
+.row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 100px 0;
+}
+
+.col-1{
+    flex-basis:40%;
+    position: relative;
+   
+    
+}
+
+.col-1 h3{
+    font-size: 15px;
+}
+
+.avatar{
+    width: 100px;
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.col-2{
+    position: relative;
+    flex-basis: 60%;
+    display: flex;
+    align-items: center;
+}
+
+.col-2 .qr{
+    width: 100%;
+   
+}
+
+.ava-col-1{
+    flex-basis:80%;
+    position: relative;
+    margin-left: 50px;
+    float: left;
+    margin: 0 auto;
+}
+
+.set-col-1{
+    flex-basis:80%;
+    position: relative;
+    margin-left: 50px;
+    float: left;
+    margin: 0 auto;
+}
+
+form .formRow input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+form .formRow input:focus{
+    border-color: #16a085;
+    box-shadow: inset 0px 0px 2px 2px rgba(26,188,156,0.25);
+  }
+  
+form .formRow input::placeholder{
+    color: #999;
+  }
+
+  form .formBtn input{
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    padding-left: 0px;
+    background: #16a085;
+    border: 3px solid #16a085;
+    cursor: pointer;
+  }
+
+  textarea{
+    resize: none;
+    
+  }
+
+  .formRow h3{
+    font-size: 12px;
+
+  }
+
+
+@media only screen and (max-width:700px){
+       .col-2{
+        margin-top: 20vw;
+    }
+
+    .navbar{
+    margin-bottom: auto;
+    }
+    
+    nav ul{
+        width: 100%;
+        position: aboslute;
+        top:75px;
+        right: 0;
+        z-index: 2;
+    }
+
+    nav ul li{
+        display: block;
+        margin-top: 1px;  
+    }
+
+    nav ul li a{
+        color: rgb(0, 0, 0);
+    }
+    
+    .menuic{
+    display: block;
+}
+
+#menuList{
+    overflow: hidden;
+    transition: 0.5s;
+}
+    .row{
+        flex-direction: column-reverse;
+        margin: 50px 0;
+    }
+}

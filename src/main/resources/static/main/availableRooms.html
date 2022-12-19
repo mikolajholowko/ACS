@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <title>QR</title>
+        <link rel="stylesheet" href="style.css">
+    
+    </head>
+    <body>
+<div class="containter">
+    <div class="navbar">
+        <img src="logo.png" alt="logo" class="logo">
+        <nav>
+            <ul id="menuList">
+                <li><a href="index.html">QR Code</a></li>
+                <li><a href="availableRooms.html">Dostępne pomieszczenia</a></li>
+                <li><a href="accountSettings.html">Ustawienia konta</a></li>
+                <li><a href="createAcc.html">Utwórz konto</a></li>
+                <li><a href="editAcc.html">Edytuj konto</a></li>
+                <li><a href="roomsSettings.html">Zarządzanie pomieszczeniami</a></li>
+                <li><a href="cameraAnalysis.html">Logi kamery</a></li>
+            </ul>
+        </nav>
+        <img src="menu.png" alt="menu" class="menuic" 
+         onclick="togglemenu()">
+    </div>
+    <div class="row">
+        <div class="ava-col-1">
+            <ul>
+                <li>>01 Adm room</li>
+                <li>>02 Storage</li>
+                <li>>03 Kitchen</li>
+              </ul>
+        </div>
+    </div>
+
+</div>
+    <script>
+        var menuList = document.getElementById("menuList");
+        menuList.style.maxHeight = "0px";
+        function togglemenu(){
+            if(menuList.style.maxHeight == "0px")
+            {
+                menuList.style.maxHeight = "135px";
+            }
+            else
+            {
+                menuList.style.maxHeight = "0px";
+            }
+        }
+    </script>
+    </body>
+</html>
