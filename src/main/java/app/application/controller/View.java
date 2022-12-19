@@ -1,7 +1,8 @@
 package app.application.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
+@Controller
 public class View {
 
     public View() {
@@ -9,7 +10,7 @@ public class View {
 
     @GetMapping("/")
     public String index() {
-        return "login.html";
+        return "main/index.html";
     }
 
     @GetMapping("/employee")
@@ -24,7 +25,7 @@ public class View {
 
     @GetMapping("/login")
     public String login() {
-        return "index.html";
+        return "login.html";
     }
 
 }

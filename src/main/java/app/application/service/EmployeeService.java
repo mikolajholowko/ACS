@@ -5,6 +5,8 @@ import app.application.model.dto.EmployeeDto;
 import app.application.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class EmployeeService {
 
+    private final PasswordEncoder passwordEncoder;
     private final EmployeeRepository employeeRepository;
 
 
@@ -38,6 +41,7 @@ public class EmployeeService {
     }
 
     public EmployeeDto save(EmployeeDto employeeDto) {
+        employeeDto.setPassword(passwordEncoder.encode(employeeDto.getPassword()));
         return Employee.mapToDto(employeeRepository.save(Employee.mapToEntity(employeeDto)));
     }
 

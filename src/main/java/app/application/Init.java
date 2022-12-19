@@ -56,12 +56,13 @@ public class Init implements InitializingBean {
         log.info(decode);
 
         baeldungCipherService.rsa();
+        doSmth();
 
     }
 
 
     private void doSmth() {
-        Employee employeeDto = employeeService.save(new Employee("Mikołaj", "Hołowko", "mholowko", "mholowko", "email", Role.ROLE_ADMIN));
+        Employee employeeDto = employeeService.save(new Employee("Mikołaj", "Hołowko", "mholowko", "1234", "email", Role.ROLE_ADMIN));
 //
 //        Qr qr = qrService.generateQrCodeForEmployee(Employee.mapToDto(employeeDto));
 //
@@ -91,4 +92,5 @@ public class Init implements InitializingBean {
 //    }
 
     }
+
 }
