@@ -3,11 +3,13 @@ package app.application;
 import app.application.cipher.ACSCipherUtils;
 import app.application.model.Employee;
 import app.application.model.Qr;
+import app.application.model.dto.EmployeeDto;
 import app.application.model.dto.Role;
 import app.application.repository.EmployeeRepository;
 import app.application.repository.QrRespository;
 import app.application.service.BaeldungCipherService;
 import app.application.service.CipherService;
+import app.application.service.EmployeeService;
 import app.application.service.QrService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +30,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -35,7 +38,7 @@ import java.util.Arrays;
 public class Init implements InitializingBean {
 
     private final QrService qrService;
-    private final EmployeeRepository employeeService;
+    private final EmployeeService employeeService;
     private final QrRespository qrRespository;
     private final BaeldungCipherService baeldungCipherService;
 
@@ -62,7 +65,7 @@ public class Init implements InitializingBean {
 
 
     private void doSmth() {
-        Employee employeeDto = employeeService.save(new Employee("Mikołaj", "Hołowko", "mholowko", "1234", "email", Role.ROLE_ADMIN));
+        EmployeeDto employeeDto = employeeService.save(new EmployeeDto("Mikołaj", "Hołowko", "1234", Role.ROLE_ADMIN,"mholowko", "mholowko" ));
 //
 //        Qr qr = qrService.generateQrCodeForEmployee(Employee.mapToDto(employeeDto));
 //

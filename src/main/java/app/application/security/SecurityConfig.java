@@ -33,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().loginPage("/login")
                 .permitAll()
+                .defaultSuccessUrl("/main")
                 .and().logout()
                 .logoutSuccessUrl("/login");
         http.headers().frameOptions().sameOrigin();

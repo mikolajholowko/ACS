@@ -70,6 +70,8 @@ public class Employee {
     public static Employee mapToEntity(EmployeeDto employeeDto) {
         Employee employee = new Employee();
         employee.setId(employeeDto.getId());
+        employee.setLogin(employeeDto.getLogin());
+        employee.setPassword(employeeDto.getPassword());
         employee.setFirstName(employeeDto.getFirstName());
         employee.setLastName(employeeDto.getLastName());
         employee.setEmail(employeeDto.getEmail());

@@ -10,7 +10,7 @@ public class View {
 
     @GetMapping("/")
     public String index() {
-        return "main/index.html";
+        return "login.html";
     }
 
     @GetMapping("/employee")
@@ -27,5 +27,8 @@ public class View {
     public String login() {
         return "login.html";
     }
+
+    @GetMapping("/main")
+    public String main(){return "main/main.html";}
 
 }
