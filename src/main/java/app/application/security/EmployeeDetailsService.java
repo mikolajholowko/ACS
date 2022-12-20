@@ -24,6 +24,6 @@ public class EmployeeDetailsService implements UserDetailsService {
 
         employee.orElseThrow(() -> new UsernameNotFoundException("User with email " + email + " not found!"));
 
-        return employee.map(EmployeesDetails::new).get();
+        return employee.map(e -> new EmployeesDetails(e.getEmail(), e.getPassword(), e.getRole())).get();
     }
 }

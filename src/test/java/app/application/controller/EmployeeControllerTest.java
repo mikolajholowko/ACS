@@ -1,13 +1,10 @@
 package app.application.controller;
 
-import app.application.QrApp;
 import app.application.model.Employee;
 import app.application.model.dto.EmployeeDto;
 import app.application.model.dto.Role;
 import app.application.repository.EmployeeRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,19 +15,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import java.util.UUID;
-
-import org.junit.Assert;
 
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
@@ -60,7 +47,7 @@ class EmployeeControllerTest {
 
     @Test
     void findById() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/employee/{id}", "c0a80069-84fc-1ca0-8184-fc8ca3030000"))
+        mvc.perform(MockMvcRequestBuilders.get("/static/employee/{id}", "c0a80069-84fc-1ca0-8184-fc8ca3030000"))
                 .andDo(print()).andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(CONTENT_TYPE))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value("c0a80069-84fc-1ca0-8184-fc8ca3030000"));
@@ -79,7 +66,7 @@ class EmployeeControllerTest {
     @Test
     void save() throws Exception {
         EmployeeDto employeeDto = Employee.mapToDto(new Employee("Tomasz", "Spawacz", "aaabbb", "aaabbb", "email", Role.ROLE_ADMIN));
-        mvc.perform(MockMvcRequestBuilders.delete("/employee/{id}")
+        mvc.perform(MockMvcRequestBuilders.delete("/static/employee/{id}")
 
                 .contentType(CONTENT_TYPE)
                 .content(objectMapper.writeValueAsString(employeeDto)))
@@ -101,7 +88,7 @@ class EmployeeControllerTest {
     @Test
     void deleteById() throws Exception{
 
-        mvc.perform(MockMvcRequestBuilders.delete("/employee/{id}", "c0a80069-84fd-1d36-8184-fd3d3d8e0001"))
+        mvc.perform(MockMvcRequestBuilders.delete("/static/employee/{id}", "c0a80069-84fd-1d36-8184-fd3d3d8e0001"))
                 .andDo(print()).andExpect(MockMvcResultMatchers.status().isOk());
     }
 

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <title>QR</title>
+        <link rel="stylesheet" href="employee/style.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+    </head>
+    <body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+<div class="containter">
+    <div class="navbar">
+        <img src="logo.png" alt="logo" class="logo">
+        <nav>
+            <ul id="menuList">
+                <li><a href="index.html">QR Code</a></li>
+                <li><a href="availableRooms.html">Dostępne pomieszczenia</a></li>
+                <li><a href="accountSettings.html">Ustawienia konta</a></li>
+                <li><a href="reportBug.html">Zgłoś problem</a></li>
+            </ul>
+        </nav>
+        <img src="menu.png" alt="menu" class="menuic" 
+         onclick="togglemenu()">
+    </div>
+    <div class="row">
+        <div class="col-1">
+            <h2 id="user-id">khjlkjh</h2>
+            <br>
+            <h3 id="first-name">j,hlkj</h3>
+            <br>
+            <h3 id="last-name">khlkjh</h3>
+            <br>
+        </div>
+        <div class="col-2">
+            <img src="QR.png" class="qr">
+        </div>
+    </div>
+
+</div>
+    <script>
+        var menuList = document.getElementById("menuList");
+        menuList.style.maxHeight = "0px";
+        function togglemenu(){
+            if(menuList.style.maxHeight == "0px")
+            {
+                menuList.style.maxHeight = "95px";
+            }
+            else
+            {
+                menuList.style.maxHeight = "0px";
+            }
+        }
+
+        let getEmployeeList = () => {
+            return fetch('auth/employee', {
+                method: "GET",
+                headers: {'Content-Type': 'application/json'}
+            }).then(response => response.json())
+            .then(response2 => {
+               document.getElementById("user-id").innerText = "ID: " + response2.id;
+               document.getElementById("first-name").innerText = "First name: " + response2.firstName;
+               document.getElementById("last-name").innerText = "Last name: " + response2.lastName;
+               console.log(document.getElementById("last-name").innerText);
+            })
+        }
+
+        let employeeList = getEmployeeList().then(r => r);
+
+        setTimeout(10);
+    </script>
+    </body>
+</html>

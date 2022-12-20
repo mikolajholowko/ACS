@@ -2,13 +2,8 @@ package app.application.controller;
 
 import app.application.model.dto.EmployeeDto;
 import app.application.service.EmployeeService;
-import org.apache.tomcat.jni.File;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,7 +16,7 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping(value = "/employee/{id}")
+    @GetMapping(value = "/static/employee/{id}")
     public EmployeeDto findById(@PathVariable UUID id) {
         return employeeService.getById(id);
     }
@@ -31,12 +26,12 @@ public class EmployeeController {
         return employeeService.getAll();
     }
 
-    @PutMapping(value = "/employee")
+    @PutMapping(value = "/static/employee")
     public void save(@RequestBody EmployeeDto employeeDto) {
         employeeService.save(employeeDto);
     }
 
-    @DeleteMapping(value = "/employee/{id}")
+    @DeleteMapping(value = "/static/employee/{id}")
     public void deleteById(@PathVariable UUID id) {
         employeeService.deleteById(id);
     }

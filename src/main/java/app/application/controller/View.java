@@ -3,7 +3,6 @@ package app.application.controller;
 import app.application.model.dto.EmployeeDto;
 import app.application.service.EmployeeService;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,12 +22,12 @@ public class View {
 
     @GetMapping("/employee")
     public String employee() {
-        return "employee.html";
+        return "employee/index.html";
     }
 
     @GetMapping("/admin")
     public String admin() {
-        return "admin.html";
+        return "main/index.html";
     }
 
     @GetMapping("/login")
@@ -38,7 +37,7 @@ public class View {
 
     @GetMapping("/main")
     public String main() {
-        return "main/main.html";
+        return "main/index.html";
     }
 
     @GetMapping("/auth/employee")
