@@ -69,33 +69,6 @@ public class Init implements InitializingBean {
         EmployeeDto employeeDto1 = employeeService.save(new EmployeeDto("Filip", "Ratajczak", "12345", Role.ROLE_ADMIN,"mholowko"));
         EmployeeDto employeeDto2 = employeeService.save(new EmployeeDto("Jan", "Debilski", "debilski@gmail.com", Role.ROLE_EMPLOYEE,"mholowko"));
 
-//
-//        Qr qr = qrService.generateQrCodeForEmployee(Employee.mapToDto(employeeDto));
-//
-//        System.out.println(Arrays.toString(qrRespository.findAll().get(0).getQrImage()));
-//
-//        File outputFile = new File("outputFile.jpg");
-//        try (FileOutputStream outputStream = new FileOutputStream(outputFile)) {
-//            outputStream.write(qr.getQrImage());
-//        } catch (FileNotFoundException e) {
-//            throw new RuntimeException(e);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-
-//        cipherService.generateKeys();
-
-//        String dupa = cipherService.encode("dupa");
-//        String decode = cipherService.decode(dupa);
-//        System.out.println(decode);
-
-//        File outputFile = new File("outputFile.jpg");
-//        try (FileOutputStream outputStream = new FileOutputStream(outputFile)) {
-//             outputStream.write(qr.getQrImage());
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 
     }
 
