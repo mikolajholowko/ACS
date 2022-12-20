@@ -1,10 +1,12 @@
 package app.application.service;
 
+import app.application.exception.ACSException;
 import app.application.model.Employee;
 import app.application.model.dto.EmployeeDto;
 import app.application.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -43,6 +45,15 @@ public class EmployeeService {
     public EmployeeDto save(EmployeeDto employeeDto) {
         employeeDto.setPassword(passwordEncoder.encode(employeeDto.getPassword()));
         return Employee.mapToDto(employeeRepository.save(Employee.mapToEntity(employeeDto)));
+    }
+
+    public EmployeeDto getByEmail(String email) {
+        return employeeRepository.findByEmail(email)
+                .map(Employee::mapToDto)
+                .orElseThrow(() -> {
+                    String exMsg = String.format("User with email: [%s] does not found!", email);
+                    return new ACSException(exMsg);
+                });
     }
 
 

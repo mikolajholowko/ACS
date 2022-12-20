@@ -65,7 +65,9 @@ public class Init implements InitializingBean {
 
 
     private void doSmth() {
-        EmployeeDto employeeDto = employeeService.save(new EmployeeDto("Mikołaj", "Hołowko", "1234", Role.ROLE_ADMIN,"mholowko", "mholowko" ));
+        EmployeeDto employeeDto = employeeService.save(new EmployeeDto("Mikołaj", "Hołowko", "1234", Role.ROLE_ADMIN,"mholowko"));
+        EmployeeDto employeeDto1 = employeeService.save(new EmployeeDto("Filip", "Ratajczak", "12345", Role.ROLE_ADMIN,"mholowko"));
+
 //
 //        Qr qr = qrService.generateQrCodeForEmployee(Employee.mapToDto(employeeDto));
 //

@@ -36,7 +36,6 @@ public class Employee {
     private UUID id;
     private String firstName;
     private String lastName;
-    private String login;
     private String password;
     private String email;
     private Role role;
@@ -48,10 +47,9 @@ public class Employee {
     @JoinColumn(name = "qr_id", referencedColumnName = "id")
     private Qr qr;
 
-    public Employee(String firstName, String lastName, String login, String password, String email, Role role) {
+    public Employee(String firstName, String lastName, String password, String email, Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.login = login;
         this.password = password;
         this.email = email;
         this.role = role;
@@ -70,7 +68,6 @@ public class Employee {
     public static Employee mapToEntity(EmployeeDto employeeDto) {
         Employee employee = new Employee();
         employee.setId(employeeDto.getId());
-        employee.setLogin(employeeDto.getLogin());
         employee.setPassword(employeeDto.getPassword());
         employee.setFirstName(employeeDto.getFirstName());
         employee.setLastName(employeeDto.getLastName());

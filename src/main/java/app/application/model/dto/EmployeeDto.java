@@ -16,17 +16,15 @@ public class EmployeeDto {
     private String firstName;
     private String lastName;
     private String email;
-    private Role role;
     private String password;
+    private Role role;
 
-    private String login;
 
-    public EmployeeDto(String firstName, String lastName, String email, Role role, String login, String password) {
+    public EmployeeDto(String firstName, String lastName, String email, Role role, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.role = role;
-        this.login = login;
         this.password = password;
     }
 }

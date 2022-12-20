@@ -1,12 +1,20 @@
 package app.application.controller;
 
+import app.application.model.dto.EmployeeDto;
+import app.application.service.EmployeeService;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 @Controller
+@AllArgsConstructor
 public class View {
 
-    public View() {
-    }
+    private final EmployeeService employeeService;
+
 
     @GetMapping("/")
     public String index() {
@@ -29,6 +37,14 @@ public class View {
     }
 
     @GetMapping("/main")
-    public String main(){return "main/main.html";}
+    public String main() {
+        return "main/main.html";
+    }
+
+    @GetMapping("/auth/employee")
+    @ResponseBody
+    public EmployeeDto currentUserName(Authentication authentication) {
+        return employeeService.getByEmail(authentication.getName());
+    }
 
 }

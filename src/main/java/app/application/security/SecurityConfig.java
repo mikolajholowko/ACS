@@ -27,8 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .mvcMatchers("/admin").hasRole("ADMIN")
-                .mvcMatchers("/employee").hasAnyRole("ADMIN", "EMPLOYEE")
+                .mvcMatchers("/main").hasAnyRole("ADMIN", "EMPLOYEE")
                 .mvcMatchers("/login").permitAll()
                 .and()
                 .formLogin().loginPage("/login")

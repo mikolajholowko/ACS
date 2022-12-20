@@ -20,7 +20,7 @@ public class EmployeesDetails implements UserDetails {
     List<GrantedAuthority> role;
 
     public EmployeesDetails(Employee employee) {
-        this.username = employee.getLogin();
+        this.username = employee.getEmail();
         this.password = employee.getPassword();
         this.role = Arrays.stream(Role.values())
                 .map(e -> new SimpleGrantedAuthority(e.name()))
