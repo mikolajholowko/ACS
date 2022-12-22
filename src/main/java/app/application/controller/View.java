@@ -40,6 +40,23 @@ public class View {
         return "main/index.html";
     }
 
+    @GetMapping("/availablerooms")
+    public String availableRoom(){ return "main/availableRooms.html";}
+
+    @GetMapping("/employeeavailablerooms")
+    public String employeeavailablerooms(){return "employee/availableRooms.html";}
+
+    @GetMapping("/createaccount")
+    public String createAccount(){return "main/createAcc.html";}
+
+    @GetMapping("/accountupdate")
+    public String accountupdate(){return "main/accountSettings.html";}
+
+    @GetMapping("/employeeaccountupdate")
+    public String employeeaccountupdate(){return "employee/accountSettings.html";}
+
+
+
     @GetMapping("/auth/employee")
     @ResponseBody
     public EmployeeDto currentUserName(Authentication authentication) {

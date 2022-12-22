@@ -1,11 +1,10 @@
 body{
     margin: 0;
     padding: 0;
-    font-family:"Bebas Neue";
+    font-family:"serif";
 
     height:100vh;
     overflow: hidden;
-    background-image : url(abstract-blur-gym-and-fitness-room-interior.jpg);
     background-position: center center;
 
     background-size: cover;
@@ -16,15 +15,15 @@ body{
 {
     background-color: white;
     width: 400px;
-    height: 300px;
+    height: 800px;
     padding: 50px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 100px;
     -webkit-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
     -moz-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
-    box-shadow: 3px 3px 30px 15px rgba(7, 6, 6, 0.9);
-    font-family: Bebas Neue ;
+   
+    font-family: serif ;
     opacity: 0.95;
 }
 
@@ -59,7 +58,7 @@ input[type=password]:focus
 input[type=submit]
 {
     width: 300px;
-    background-color: #1b75a8;
+    background-color: #16a085;
     font-size:20px;
     color: white;
     padding: 15px 10px;
@@ -82,7 +81,7 @@ input[type=submit]:focus
 
 input[type=submit]:hover
 {
-    background-color: #58c9c1;
+    background-color: #0b473b;
     cursor:pointer;
 }
 
@@ -122,5 +121,8 @@ input:focus:-ms-input-placeholder
     color: #1b75a8;
 }
 
+img {
+    border: 1px solid rgb(0, 0, 0);
+  }
 
 

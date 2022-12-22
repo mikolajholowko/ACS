@@ -4,22 +4,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <title>QR</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="main/style.css">
     
     </head>
     <body>
 <div class="containter">
     <div class="navbar">
-        <img src="logo.png" alt="logo" class="logo">
+        <img src="main/logo.png" alt="logo" class="logo">
         <nav>
             <ul id="menuList">
-                <li><a href="index.html">QR Code</a></li>
-                <li><a href="availableRooms.html">Dostępne pomieszczenia</a></li>
-                <li><a href="accountSettings.html">Ustawienia konta</a></li>
-                <li><a href="reportBug.html">Zgłoś problem</a></li>
+                <li><a href="/employee">QR Code</a></li>
+                <li><a href="/employeeavailablerooms">Dostępne pomieszczenia</a></li>
+                <li><a href="/employeeaccountupdate">Ustawienia konta</a></li>
+                <li><a href="/">Wyloguj</a></li>
             </ul>
         </nav>
-        <img src="menu.png" alt="menu" class="menuic" 
+        <img src="main/menu.png" alt="menu" class="menuic" 
          onclick="togglemenu()">
     </div>
     <div class="row">
@@ -46,8 +46,7 @@
         function togglemenu(){
             if(menuList.style.maxHeight == "0px")
             {
-                menuList.style.maxHeight = "95px";
-            }
+                menuList.style.maxHeight = "135px";            }
             else
             {
                 menuList.style.maxHeight = "0px";

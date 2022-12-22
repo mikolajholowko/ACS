@@ -24,6 +24,13 @@ public class SecurityConfig {
         http.csrf().disable();
         http.authorizeRequests()
                 .mvcMatchers("/main").hasAnyRole("ADMIN", "EMPLOYEE")
+                .mvcMatchers("/availablerooms").hasAnyRole("ADMIN")
+                .mvcMatchers("/employeeavailablerooms").hasAnyRole("EMPLOYEE")
+                .mvcMatchers("/createaccount").hasAnyRole("ADMIN")
+                .mvcMatchers("/accountupdate").hasAnyRole("ADMIN")
+                .mvcMatchers("/employeeaccountupdate").hasAnyRole("EMPLOYEE")
+                .mvcMatchers("/admin").hasAnyRole("ADMIN")
+                .mvcMatchers("/employee").hasAnyRole("ADMIN", "EMPLOYEE")
                 .mvcMatchers("/login").permitAll()
                 .and()
                 .formLogin().loginPage("/login")

@@ -4,31 +4,50 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <title>QR</title>
-        <link rel="stylesheet" href="style.css">
-    
+        <link rel="stylesheet" href="employee/style.css">    
     </head>
     <body>
 <div class="containter">
     <div class="navbar">
-        <img src="logo.png" alt="logo" class="logo">
+        <img src="main/logo.png" alt="logo" class="logo">
         <nav>
             <ul id="menuList">
-                <li><a href="index.html">QR Code</a></li>
-                <li><a href="availableRooms.html">Dostępne pomieszczenia</a></li>
-                <li><a href="accountSettings.html">Ustawienia konta</a></li>
-                <li><a href="reportBug.html">Zgłoś problem</a></li>
+                <li><a href="/employee">QR Code</a></li>
+                <li><a href="/employeeavailablerooms">Dostępne pomieszczenia</a></li>
+                <li><a href="/employeeaccountupdate">Ustawienia konta</a></li>
+                <li><a href="/">Wyloguj</a></li>
             </ul>
         </nav>
-        <img src="menu.png" alt="menu" class="menuic" 
+        <img src="main/menu.png" alt="menu" class="menuic" 
          onclick="togglemenu()">
     </div>
-    <div class="row">
-        <div class="ava-col-1">
-            <ul>
-                <li>>01 Adm room</li>
-                <li>>02 Storage</li>
-                <li>>03 Kitchen</li>
-              </ul>
+    <div class="rowtable">
+        <div class="table-container">
+           <div class="table-container">
+<table class="table">
+<thead>
+<tr>
+<th>Nazwa pomieszczenia</th>
+<th>Numer pokoju</th>
+<th>STATUS</th>
+</tr>
+
+</thead>
+<tbody>
+    <tr>
+        <td data-label="Nazwa">IT Office</td>
+        <td data-label="Numer pokoju">2</td>
+        <td data-label="STATUS">DOSTĘPNY</td>
+    </tr>
+    <tr>
+        <td data-label="Nazwa">WC</td>
+        <td data-label="Nr pokoju">232</td>
+        <td data-label="STATUS">NIEDOSTĘPNY</td>
+    </tr>
+   </tbody>
+</table>
+
+           </div>
         </div>
     </div>
 
@@ -39,7 +58,7 @@
         function togglemenu(){
             if(menuList.style.maxHeight == "0px")
             {
-                menuList.style.maxHeight = "95px";
+                menuList.style.maxHeight = "135px";
             }
             else
             {
