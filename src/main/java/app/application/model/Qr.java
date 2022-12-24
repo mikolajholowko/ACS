@@ -27,9 +27,8 @@ public class Qr {
     private UUID id = UUID.randomUUID();
     private byte[] qrImage = new byte[]{};
     private long timestamp;
-
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "employee_id", referencedColumnName = "id")
+    @JoinColumn(name = "employee_id")
     private Employee employee;
 
     public Qr(byte[] qrImage, long timestamp, Employee employee) {

@@ -54,8 +54,6 @@ class EmployeeControllerTest {
     }
 
 
-
-
     @Test
     void findAllEmployees() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/employees"))
@@ -65,38 +63,20 @@ class EmployeeControllerTest {
 
     @Test
     void save() throws Exception {
-        EmployeeDto employeeDto = Employee.mapToDto(new Employee("Tomasz", "Spawacz", "aaabbb", "aaabbb", "email", Role.ROLE_ADMIN));
-        mvc.perform(MockMvcRequestBuilders.delete("/static/employee/{id}")
-
-                .contentType(CONTENT_TYPE)
-                .content(objectMapper.writeValueAsString(employeeDto)))
+        EmployeeDto employeeDto = Employee.mapToDto(new Employee("Tomasz", "Spawacz", "aaabbb", "email", Role.ROLE_ADMIN));
+        mvc.perform(MockMvcRequestBuilders.delete("/employee/{id}")
+                        .contentType(CONTENT_TYPE)
+                        .content(objectMapper.writeValueAsString(employeeDto)))
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
-//
-
-//
-//
-//                                .andExpect(MockMvcResultMatchers.jsonPath("$.first_name").value("aaa"))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.last_name").value("bbb"))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.login").value("aaabbb"))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("aaabbb"))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.role").value("1"))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.qr_id").value(""));
     }
 
     @Test
-    void deleteById() throws Exception{
+    void deleteById() throws Exception {
 
         mvc.perform(MockMvcRequestBuilders.delete("/static/employee/{id}", "c0a80069-84fd-1d36-8184-fd3d3d8e0001"))
                 .andDo(print()).andExpect(MockMvcResultMatchers.status().isOk());
     }
-
-//    @Test
-//    void isIdEnteredRoom{
-//
-//    }
-
-
 
 }

@@ -38,13 +38,14 @@ public class Employee {
     private String lastName;
     private String password;
     private String email;
+
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     Set<Entrance> entrances;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "qr_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "employee")
     private Qr qr;
 
     public Employee(String firstName, String lastName, String password, String email, Role role) {

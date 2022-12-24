@@ -39,7 +39,7 @@ public class Init implements InitializingBean {
 
     private final QrService qrService;
     private final EmployeeService employeeService;
-    private final QrRespository qrRespository;
+
     private final BaeldungCipherService baeldungCipherService;
 
     private final ACSCipherUtils acsCipherUtils;

@@ -8,25 +8,18 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class QrDto {
 
     private UUID id;
     private UUID employeeId;
     private long timestamp;
-    private String role;
+    private Role role;
 
-    @Override
-    public String toString() {
-        return "QrDto{" +
-                "id=" + id +
-                ", employeeId=" + employeeId +
-                ", timestamp=" + timestamp +
-                ", role='" + role + '\'' +
-                '}';
-    }
-
-    public QrDto(UUID employeeId, long timestamp) {
+    public QrDto(UUID employeeId, long timestamp, Role role) {
         this.employeeId = employeeId;
         this.timestamp = timestamp;
+        this.role = role;
     }
+
 }

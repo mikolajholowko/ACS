@@ -1,6 +1,6 @@
 package app.application.controller;
 
-import app.application.model.dto.EmployeeDto;
+import app.application.model.Qr;
 import app.application.model.dto.QrDto;
 import app.application.service.QrService;
 import lombok.RequiredArgsConstructor;
@@ -22,12 +22,12 @@ public class QrController {
     //TODO use ResponseEntity<Dto> instead of Dto
 
     @GetMapping(value = "/qr/{id}")
-    public QrDto findById(@PathVariable UUID id) {
-        return qrService.getById(id);
+    public ResponseEntity<byte[]> findByEmployeeUUID(@PathVariable UUID id) {
+        return ResponseEntity.ok(qrService.getByEmployeeId(id));
     }
 
     @GetMapping(value = "/qr")
-    public List<QrDto> findAllEmployees() {
+    public List<QrDto> findAllQrCodes() {
         return qrService.getAll();
     }
 
@@ -41,41 +41,15 @@ public class QrController {
         qrService.deleteById(id);
     }
 
-    @PostMapping(value = "/generateQr")
-    public String uploadImage(@RequestBody EmployeeDto employeeDto) {
-        qrService.generateQrCodeForEmployee(employeeDto);
-        return employeeDto.toString();
-    }
-
-
-//    @GetMapping(value = "/image", produces = MediaType.IMAGE_JPEG_VALUE)
-//    public ResponseEntity<Resource> image() throws IOException {
-//        final ByteArrayResource inputStream = new ByteArrayResource(Files.readAllBytes(Paths.get(
-//                "/home/silentsudo/Videos/dum111111b.jpg"
-//        )));
-//        return ResponseEntity
-//                .status(HttpStatus.OK)
-//                .contentLength(inputStream.contentLength())
-//                .body(inputStream);
-//
-//    }
-//
-//    @GetMapping(value = "/png", produces = MediaType.IMAGE_JPEG_VALUE)
-//    public ResponseEntity<Resource> image() throws IOException {
-//        final ByteArrayResource inputStream = new ByteArrayResource(Files.readAllBytes(Paths.get(
-//                "C:\\Users\\mikol\\Desktop\\SZKF-main\\outputFile.jpg"
-//        )));
-//        return ResponseEntity
-//                .status(HttpStatus.OK)
-//                .contentLength(inputStream.contentLength())
-//                .body(inputStream);
-//
-//    }
-
-    @GetMapping(value = "/api/v1/validate-code")
+    @GetMapping(value = "/validate-code")
     public ResponseEntity<Integer> validateCode(@RequestBody QrDto qrDto) {
         System.out.println(qrDto);
         return ResponseEntity.status(qrService.qrValidation(qrDto)).body(qrService.qrValidation(qrDto));
+    }
+
+    @GetMapping(value = "/refreshQr/{id}")
+    public ResponseEntity<QrDto> refreshQr(@PathVariable UUID id) {
+        return ResponseEntity.ok(Qr.mapToDto(qrService.refreshQrForEmployee(id)));
     }
 
 }

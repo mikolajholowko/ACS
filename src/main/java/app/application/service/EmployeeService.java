@@ -23,6 +23,7 @@ public class EmployeeService {
 
     private final PasswordEncoder passwordEncoder;
     private final EmployeeRepository employeeRepository;
+    private final QrService qrService;
 
 
     public EmployeeDto getById(UUID id) {
@@ -44,7 +45,9 @@ public class EmployeeService {
 
     public EmployeeDto save(EmployeeDto employeeDto) {
         employeeDto.setPassword(passwordEncoder.encode(employeeDto.getPassword()));
-        return Employee.mapToDto(employeeRepository.save(Employee.mapToEntity(employeeDto)));
+        Employee save = employeeRepository.save(Employee.mapToEntity(employeeDto));
+        qrService.generateQrCodeForEmployee(save.getId());
+        return Employee.mapToDto(save);
     }
 
     public EmployeeDto getByEmail(String email) {
