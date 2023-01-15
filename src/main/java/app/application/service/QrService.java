@@ -3,12 +3,16 @@ package app.application.service;
 
 import app.application.exception.ACSException;
 import app.application.model.Employee;
+import app.application.model.Entrance;
 import app.application.model.Qr;
+import app.application.model.Room;
 import app.application.model.dto.EmployeeDto;
 import app.application.model.dto.QrDto;
 import app.application.model.dto.Role;
 import app.application.repository.EmployeeRepository;
+import app.application.repository.EntranceRepository;
 import app.application.repository.QrRespository;
+import app.application.repository.RoomRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.vavr.control.Try;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +39,10 @@ public class QrService {
     private final QrRespository qrRespository;
     private final ObjectMapper objectMapper;
     private final EmployeeRepository employeeRepository;
+
+    private final RoomRepository roomRepository;
+
+    private final EntranceRepository entranceRepository;
 
     public byte[] getByEmployeeId(UUID employeeId) {
         return qrRespository.findByEmployeeId(employeeId)
@@ -129,6 +137,8 @@ public class QrService {
                     .orElseThrow(() -> new ACSException("User with id: " + qrDto.getEmployeeId() + " does not found!")));
             if (employeeDto.getId() == qrDto.getEmployeeId()) {
                 if (qrDto.getRole().getValue() >= employeeDto.getRole().getValue()) {
+                    Optional<Room> first = roomRepository.findAll().stream().filter(e -> e.getRoomName().equals(qrDto.getRoomNumber())).findFirst();
+                    entranceRepository.save(new Entrance(LocalDateTime.now(), LocalDateTime.now(), Employee.mapToEntity(employeeDto), first.get()));
                     return 200;
                 } else {
                     return 401;

@@ -25,4 +25,7 @@ public interface RoomRepository extends JpaRepository<Room, UUID> {
     @Override
     void delete(Room entity);
 
+    @Query(value = "SELECT r from Room r WHERE r.roomName = ?1")
+    Optional<Room> findByRoomName(String roomName);
+
 }

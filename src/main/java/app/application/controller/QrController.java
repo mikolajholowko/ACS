@@ -43,8 +43,16 @@ public class QrController {
 
     @GetMapping(value = "/validate-code")
     public ResponseEntity<Integer> validateCode(@RequestBody QrDto qrDto) {
-        System.out.println(qrDto);
-        return ResponseEntity.status(qrService.qrValidation(qrDto)).body(qrService.qrValidation(qrDto));
+
+        int i = qrService.qrValidation(qrDto);
+
+        if (i == 200) {
+            log.info("Dostęp do pomieszczenia do użykownika o identyfikatorze {} został nadany.", qrDto.getEmployeeId());
+        } else {
+            log.info("Autoryzacja dla pracownika o identyfikatorze {} nieudana.", qrDto.getEmployeeId());
+        }
+
+        return ResponseEntity.status(qrService.qrValidation(qrDto)).body(i);
     }
 
     @GetMapping(value = "/refreshQr/{id}")

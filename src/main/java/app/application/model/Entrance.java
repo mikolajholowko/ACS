@@ -37,7 +37,6 @@ public class Entrance {
     private UUID id;
     private LocalDateTime enter;
     private LocalDateTime leave;
-    //private Long roomId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id")
     private Employee employee;
@@ -51,8 +50,13 @@ public class Entrance {
         entranceDto.setId(entrance.getId());
         entranceDto.setEnter(entrance.getEnter());
         entranceDto.setLeave(entrance.getLeave());
-        //entranceDto.setRoomsID(entrance.getRoomId());
         return entranceDto;
+    }
 
+    public Entrance(LocalDateTime enter, LocalDateTime leave, Employee employee, Room room) {
+        this.enter = enter;
+        this.leave = leave;
+        this.employee = employee;
+        this.room = room;
     }
 }

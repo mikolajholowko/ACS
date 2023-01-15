@@ -18,27 +18,27 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping(value = "/employee/{id}")
+    @GetMapping(value = "/api/v1/employee/{id}")
     public EmployeeDto findById(@PathVariable UUID id) {
         return employeeService.getById(id);
     }
 
-    @GetMapping(value = "/employees")
+    @GetMapping(value = "/api/v1/employees")
     public List<EmployeeDto> findAllEmployees() {
         return employeeService.getAll();
     }
 
-    @PutMapping(value = "/employee")
+    @PutMapping(value = "/api/v1/employee")
     public void save(@RequestBody EmployeeDto employeeDto) {
         employeeService.changeEmailAndPassword(employeeDto);
     }
 
-    @DeleteMapping(value = "/employee/{id}")
+    @DeleteMapping(value = "/api/v1/employee/{id}")
     public void deleteById(@PathVariable UUID id) {
         employeeService.deleteById(id);
     }
 
-    @PostMapping(value = "/employee")
+    @PostMapping(value = "/api/v1/employee")
     public EmployeeDto createEmployee(@RequestBody EmployeeDto employeeDto){
         return employeeService.save(employeeDto);
     }

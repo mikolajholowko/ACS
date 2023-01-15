@@ -16,7 +16,7 @@
                 <li><a href="/admin">QR Code</a></li>
                 <li><a href="/admin-available-rooms">Dostępne pomieszczenia</a></li>
                 <li><a href="/admin-create-account">Utwórz konto dla użytkownika</a></li>
-                <li><a href="/logout">Wyloguj</a></li>
+                <li><a href="/">Wyloguj</a></li>
             </ul>
         </nav>
         <img src="main/menu.png" alt="menu" class="menuic"
@@ -80,7 +80,7 @@
 
             console.log(data);
 
-            return fetch('/employee', {
+            return fetch('/api/v1/employee', {
                     method: "PUT",
                     body: JSON.stringify(data),
                     headers: {'Content-Type': 'application/json'}

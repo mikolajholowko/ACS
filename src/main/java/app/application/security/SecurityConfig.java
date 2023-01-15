@@ -21,11 +21,11 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .mvcMatchers("/admin-create-account").hasRole("ADMIN")
-                .mvcMatchers("/admin-available-rooms").hasRole("ADMIN")
-                .mvcMatchers("/admin-account-update").hasRole("ADMIN")
-                .mvcMatchers("/employee-available-rooms").hasAnyRole("ADMIN", "EMPLOYEE")
-                .mvcMatchers("/employee-account-update").hasAnyRole("ADMIN", "EMPLOYEE")
+//                .mvcMatchers("/admin-create-account").hasRole("ADMIN")
+//                .mvcMatchers("/admin-available-rooms").hasRole("ADMIN")
+//                .mvcMatchers("/admin-account-update").hasRole("ADMIN")
+//                .mvcMatchers("/employee-available-rooms").hasAnyRole("ADMIN", "EMPLOYEE")
+//                .mvcMatchers("/employee-account-update").hasAnyRole("ADMIN", "EMPLOYEE")
                 .mvcMatchers("/admin").hasAnyRole("ADMIN")
                 .mvcMatchers("/employee").hasAnyRole("ADMIN", "EMPLOYEE")
                 .mvcMatchers("/login").permitAll()
@@ -33,10 +33,10 @@ public class SecurityConfig {
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
-                .successHandler(loginSuccessHandler)
-                .and()
-                .logout().logoutSuccessUrl("/logout").invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID");
+                .successHandler(loginSuccessHandler);
+//                .and()
+////                .logout().logoutSuccessUrl("/logout").invalidateHttpSession(true)
+//                .deleteCookies("JSESSIONID");
         http.headers().frameOptions().sameOrigin();
 
         return http.build();
