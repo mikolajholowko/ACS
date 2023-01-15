@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>QR</title>
+    <link rel="stylesheet" href="admin/style.css">
+
+</head>
+<body>
+<div class="containter">
+    <div class="navbar">
+        <img src="main/logo.png" alt="logo" class="logo">
+        <nav>
+            <ul id="menuList">
+                <li><a href="/admin">QR Code</a></li>
+                <li><a href="/admin-available-rooms">Dostępne pomieszczenia</a></li>
+                <li><a href="/admin-account-update">Ustawienia konta</a></li>
+                <li><a href="/">Wyloguj</a></li>
+            </ul>
+        </nav>
+        <img src="main/menu.png" alt="menu" class="menuic"
+             onclick="togglemenu()">
+    </div>
+    <div class="row">
+        <div class="set-col-1">
+            <form>
+                <div class="formRow">
+                    <h3>Imię</h3>
+                    <input type="text" id="firstName">
+                </div>
+                <div class="formRow">
+                    <h3>Nazwisko</h3>
+                    <input type="text" id="lastName">
+                </div>
+                <div class="formRow">
+                    <h3>Adres e-mail:</h3>
+                    <input type="text" id="email">
+                </div>
+                <div class="formRow">
+                    <h3>Hasło:</h3>
+                    <input type="password" id="password">
+                </div>
+
+                <div class="formRow">
+                    <h3>Rola użytkownika:</h3>
+                </div>
+                <input type="radio" name="role" value="ROLE_EMPLOYEE" checked>
+                <label for="roleAdm"> Pracownik</label><br>
+                <input type="radio" name="role" value="ROLE_ADMIN">
+                <label for="roleAdm">Administrator</label>
+                <div class="formBtn">
+                    <input type="submit" value="Utwórz użytkownika" onclick="createObject()">
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+<script>
+        var menuList = document.getElementById("menuList");
+        menuList.style.maxHeight = "0px";
+        function togglemenu(){
+            if(menuList.style.maxHeight == "0px") {
+                menuList.style.maxHeight = "135px";
+            } else {
+                menuList.style.maxHeight = "0px";
+            }
+        }
+
+
+    let createObject = () => {
+        let data;
+        // Get references to the form fields
+        const firstName = document.querySelector('#firstName');
+        const lastName = document.querySelector('#lastName');
+        const email = document.querySelector('#email');
+        const password = document.querySelector('#password');
+        const role = document.querySelector('input[name="role"]:checked');
+
+        // Add an event listener to the form
+        console.log(role);
+
+            data = {
+              firstName: firstName.value,
+              lastName: lastName.value,
+              email: email.value,
+              password: password.value,
+              role: role.value
+            };
+
+            console.log(data);
+
+            return fetch('/employee', {
+                    method: "POST",
+                    body: JSON.stringify(data),
+                    headers: {'Content-Type': 'application/json'}
+            }).then(response => console.log(response));
+    }
+
+
+
+</script>
+</body>
+</html>

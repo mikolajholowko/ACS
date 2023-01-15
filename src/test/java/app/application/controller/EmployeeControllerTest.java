@@ -79,4 +79,23 @@ class EmployeeControllerTest {
                 .andDo(print()).andExpect(MockMvcResultMatchers.status().isOk());
     }
 
+    @Test
+    void testFindById() {
+    }
+
+    @Test
+    void testFindAllEmployees() {
+    }
+
+    @Test
+    void testSave() {
+    }
+
+    @Test
+    void testDeleteById() {
+    }
+
+    @Test
+    void createEmployee() {
+    }
 }

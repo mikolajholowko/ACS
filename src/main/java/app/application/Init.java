@@ -5,12 +5,10 @@ import app.application.model.Employee;
 import app.application.model.Qr;
 import app.application.model.dto.EmployeeDto;
 import app.application.model.dto.Role;
+import app.application.model.dto.RoomDto;
 import app.application.repository.EmployeeRepository;
 import app.application.repository.QrRespository;
-import app.application.service.BaeldungCipherService;
-import app.application.service.CipherService;
-import app.application.service.EmployeeService;
-import app.application.service.QrService;
+import app.application.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
@@ -46,6 +44,8 @@ public class Init implements InitializingBean {
 
     private final PublicKey publicKey;
 
+    private final RoomService roomService;
+
 
     @Override
     public void afterPropertiesSet() {
@@ -69,6 +69,7 @@ public class Init implements InitializingBean {
         EmployeeDto employeeDto1 = employeeService.save(new EmployeeDto("Filip", "Ratajczak", "12345", Role.ROLE_ADMIN,"mholowko"));
         EmployeeDto employeeDto2 = employeeService.save(new EmployeeDto("Jan", "Debilski", "debilski@gmail.com", Role.ROLE_EMPLOYEE,"mholowko"));
 
+        RoomDto roomDto = roomService.save(new RoomDto("ADMIN", 20, true, 1));
 
     }
 

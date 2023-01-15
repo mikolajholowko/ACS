@@ -7,8 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -23,40 +21,25 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .mvcMatchers("/main").hasAnyRole("ADMIN", "EMPLOYEE")
-                .mvcMatchers("/availablerooms").hasAnyRole("ADMIN")
-                .mvcMatchers("/employeeavailablerooms").hasAnyRole("EMPLOYEE")
-                .mvcMatchers("/createaccount").hasAnyRole("ADMIN")
-                .mvcMatchers("/accountupdate").hasAnyRole("ADMIN")
-                .mvcMatchers("/employeeaccountupdate").hasAnyRole("EMPLOYEE")
+                .mvcMatchers("/admin-create-account").hasRole("ADMIN")
+                .mvcMatchers("/admin-available-rooms").hasRole("ADMIN")
+                .mvcMatchers("/admin-account-update").hasRole("ADMIN")
+                .mvcMatchers("/employee-available-rooms").hasAnyRole("ADMIN", "EMPLOYEE")
+                .mvcMatchers("/employee-account-update").hasAnyRole("ADMIN", "EMPLOYEE")
                 .mvcMatchers("/admin").hasAnyRole("ADMIN")
                 .mvcMatchers("/employee").hasAnyRole("ADMIN", "EMPLOYEE")
                 .mvcMatchers("/login").permitAll()
                 .and()
-                .formLogin().loginPage("/login")
+                .formLogin()
+                .loginPage("/login")
                 .permitAll()
                 .successHandler(loginSuccessHandler)
-                .and().logout()
-                .logoutSuccessUrl("/login");
+                .and()
+                .logout().logoutSuccessUrl("/logout").invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID");
         http.headers().frameOptions().sameOrigin();
 
         return http.build();
     }
 
-
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.csrf().disable();
-//        http.authorizeRequests()
-//                .mvcMatchers("/main").hasAnyRole("ADMIN", "EMPLOYEE")
-//                .mvcMatchers("/login").permitAll()
-//                .and()
-//                .formLogin().loginPage("/login")
-//                .permitAll()
-//                .successHandler(loginSuccessHandler)
-//                .defaultSuccessUrl("/guest")
-//                .and().logout()
-//                .logoutSuccessUrl("/login");
-//        http.headers().frameOptions().sameOrigin();
-//    }
 }

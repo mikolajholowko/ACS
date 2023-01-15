@@ -3,6 +3,7 @@ package app.application.repository;
 import app.application.model.Employee;
 import app.application.model.Room;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,7 +24,5 @@ public interface RoomRepository extends JpaRepository<Room, UUID> {
 
     @Override
     void delete(Room entity);
-
-
 
 }

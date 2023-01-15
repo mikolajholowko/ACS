@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>QR</title>
+    <link rel="stylesheet" href="employee/style.css">
+
+</head>
+<body>
+<div class="containter">
+    <div class="navbar">
+        <img src="employee/logo.png" alt="logo" class="logo">
+        <nav>
+            <ul id="menuList">
+                <li><a href="/employee">QR Code</a></li>
+                <li><a href="/employee-available-rooms">Dostępne pomieszczenia</a></li>
+                <li><a href="/">Wyloguj</a></li>
+            </ul>
+        </nav>
+        <img src="employee/menu.png" alt="menu" class="menuic"
+             onclick="togglemenu()">
+    </div>
+    <div class="row">
+        <div class="set-col-1">
+            <form action="#">
+                <div class="formRow">
+                    <input type="text" placeholder="adres e-mail">
+                </div>
+                <div class="formRow">
+                    <input type="password" placeholder="hasło">
+                </div>
+                <div class="formBtn">
+                    <input type="submit" value="Zmień">
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+<script>
+        var menuList = document.getElementById("menuList");
+        menuList.style.maxHeight = "0px";
+        function togglemenu(){
+            if(menuList.style.maxHeight == "0px")
+            {
+                menuList.style.maxHeight = "135px";            }
+            else
+            {
+                menuList.style.maxHeight = "0px";
+            }
+        }
+
+        let getEmployeeId = async () => {
+        return fetch('auth/employee', {
+            method: "GET",
+            headers: {'Content-Type': 'application/json'}
+        }).then(response => response.json())
+        .then(response2 => {
+           return response2.id;
+        })
+    }
+
+    let createObject = async () => {
+        let data;
+        // Get references to the form fields
+        const field1 = document.querySelector('#email');
+        const field2 = document.querySelector('#password');
+        const userId = await getEmployeeId();
+
+        // Add an event listener to the form
+
+
+            data = {
+              id: userId,
+              email: field1.value,
+              password: field2.value
+            };
+
+            console.log(data);
+
+            return fetch('/employee', {
+                    method: "PUT",
+                    body: JSON.stringify(data),
+                    headers: {'Content-Type': 'application/json'}
+            }).then(response => console.log(response));
+
+    }
+
+</script>
+</body>
+</html>

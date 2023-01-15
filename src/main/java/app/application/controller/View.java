@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@Controller
+@Controller()
 @AllArgsConstructor
 public class View {
 
@@ -27,7 +27,7 @@ public class View {
 
     @GetMapping("/admin")
     public String admin() {
-        return "main/index.html";
+        return "admin/index.html";
     }
 
     @GetMapping("/login")
@@ -35,26 +35,32 @@ public class View {
         return "login.html";
     }
 
-    @GetMapping("/main")
-    public String main() {
-        return "main/index.html";
+
+    @GetMapping("/admin-account-update")
+    public String adminAccountUpdate() {
+        return "admin/accountUpdate.html";
     }
 
-    @GetMapping("/availablerooms")
-    public String availableRoom(){ return "main/availableRooms.html";}
+    @GetMapping("/admin-create-account")
+    public String createAccount() {
+        return "admin/createAccount.html";
+    }
 
-    @GetMapping("/employeeavailablerooms")
-    public String employeeavailablerooms(){return "employee/availableRooms.html";}
+    @GetMapping("/admin-available-rooms")
+    public String adminAvailableRooms() {
+        return "admin/availableRooms.html";
+    }
 
-    @GetMapping("/createaccount")
-    public String createAccount(){return "main/createAcc.html";}
+    @GetMapping("/employee-available-rooms")
+    public String employeeAvailableRooms() {
+        return "employee/availableRooms.html";
+    }
 
-    @GetMapping("/accountupdate")
-    public String accountupdate(){return "main/accountSettings.html";}
 
-    @GetMapping("/employeeaccountupdate")
-    public String employeeaccountupdate(){return "employee/accountSettings.html";}
-
+    @GetMapping("/employee-account-update")
+    public String employeeAccountUpdate() {
+        return "employee/accountUpdate.html";
+    }
 
 
     @GetMapping("/auth/employee")

@@ -59,5 +59,14 @@ public class EmployeeService {
                 });
     }
 
+    public EmployeeDto changeEmailAndPassword(EmployeeDto employeeDto) {
+        employeeRepository.findById(employeeDto.getId()).ifPresent(e -> {
+            e.setEmail(employeeDto.getEmail());
+            e.setPassword(passwordEncoder.encode(employeeDto.getPassword()));
+            employeeRepository.save(e);
+        });
+        return employeeDto;
+    }
+
 
 }

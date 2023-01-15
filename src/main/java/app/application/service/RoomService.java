@@ -2,7 +2,10 @@ package app.application.service;
 
 import app.application.model.Employee;
 import app.application.model.Room;
+import app.application.model.dto.EmployeeDto;
 import app.application.model.dto.RoomDto;
+import app.application.repository.EmployeeRepository;
+import app.application.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,7 +20,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class RoomService {
 
-    private final app.application.repository.RoomRepository roomRepository;
+    private final RoomRepository roomRepository;
+    private final EmployeeService employeeService;
 
     public RoomDto getById(UUID id) {
         Optional<Room> room = roomRepository.findById(id);
@@ -40,5 +44,15 @@ public class RoomService {
         return Room.mapToDto(roomRepository.save(Room.mapToEntity(roomDto)));
     }
 
+    public List<RoomDto> getAllByEmployeeId(UUID id) {
+        EmployeeDto employeeDto = employeeService.getById(id);
+
+        return roomRepository.findAll().stream()
+                .filter(e -> e.getRoomAccessibility() <= employeeDto.getRole().getValue())
+                .map(Room::mapToDto)
+                .collect(Collectors.toList());
+
+
+    }
 
 }

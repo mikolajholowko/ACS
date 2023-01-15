@@ -4,21 +4,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <title>QR</title>
-    <link rel="stylesheet" href="employee/style.css">
+    <link rel="stylesheet" href="admin/style.css">
 
 </head>
 <body>
 <div class="containter">
     <div class="navbar">
-        <img src="employee/logo.png" alt="logo" class="logo">
+        <img src="admin/logo.png" alt="logo" class="logo">
         <nav>
             <ul id="menuList">
-                <li><a href="/employee">QR Code</a></li>
-                <li><a href="/employee-account-update">Ustawienia konta</a></li>
+                <li><a href="/admin">QR Code</a></li>
+                <li><a href="/admin-create-account">Utwórz konto</a></li>
+                <li><a href="/admin-account-update">Ustawienia konta</a></li>
                 <li><a href="/">Wyloguj</a></li>
             </ul>
         </nav>
-        <img src="employee/menu.png" alt="menu" class="menuic"
+        <img src="admin/menu.png" alt="menu" class="menuic"
              onclick="togglemenu()">
     </div>
     <div class="rowtable">
@@ -35,45 +36,45 @@
                     <tbody>
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div>
 
 </div>
 <script>
-        var menuList = document.getElementById("menuList");
-        menuList.style.maxHeight = "0px";
-        function togglemenu(){
-            if(menuList.style.maxHeight == "0px")
-            {
-                menuList.style.maxHeight = "135px";
-            }
-            else
-            {
-                menuList.style.maxHeight = "0px";
-            }
-        }
 
-        let getEmployeeList = async () => {
-            return fetch('auth/employee', {
-                method: "GET",
-                headers: {'Content-Type': 'application/json'}
-            }).then(response => response.json())
-            .then(response2 => {
-               return response2.id;
-            })
+    var menuList = document.getElementById("menuList");
+    menuList.style.maxHeight = "0px";
+    function togglemenu(){
+        if(menuList.style.maxHeight == "0px")
+        {
+            menuList.style.maxHeight = "135px";
         }
+        else
+        {
+            menuList.style.maxHeight = "0px";
+        }
+    }
 
-        let getRooms = async () => {
-            const id = await getEmployeeList();
-            const url = "/rooms/access/" + id;
-            console.log(url);
-            return fetch(url, {
-                method: "GET",
-                headers: {'Content-Type': 'application/json'}
-            }).then(response => response.json())
-}
+    let getEmployeeList = async () => {
+        return fetch('auth/employee', {
+            method: "GET",
+            headers: {'Content-Type': 'application/json'}
+        }).then(response => response.json())
+        .then(response2 => {
+           return response2.id;
+        })
+    }
+
+    let getRooms = async () => {
+        const id = await getEmployeeList();
+        const url = "/rooms/access/" + id;
+        console.log(url);
+        return fetch(url, {
+            method: "GET",
+            headers: {'Content-Type': 'application/json'}
+        }).then(response => response.json())
+    }
 
     let fillTable = async () => {
         const data = await getRooms();
@@ -87,14 +88,9 @@
                 "<td>" +data[i].roomNumber+ "</td>"+
                 "<td>" +data[i].active+ "</td>";
         }
-        feather.replace()
     }
 
     fillTable();
-
-
-
-
 
 </script>
 </body>

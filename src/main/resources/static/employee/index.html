@@ -4,42 +4,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <title>QR</title>
-    <link rel="stylesheet" href="main/style.css">
+    <link rel="stylesheet" href="employee/style.css">
 </head>
 <body>
 
 
 <div class="containter">
     <div class="navbar">
-        <img src="main/logo.png" alt="logo" class="logo">
+        <img src="employee/logo.png" alt="logo" class="logo">
         <nav>
             <ul id="menuList">
-                <li><a href="/employee">QR Code</a></li>
-                <li><a href="/employeeavailablerooms">Dostępne pomieszczenia</a></li>
-                <li><a href="/employeeaccountupdate">Ustawienia konta</a></li>
+                <input type="button" id="refresh-qr" onclick="refresh(); window.location.reload();" value="Refresh QR">
+                <li><a href="/employee-available-rooms">Dostępne pomieszczenia</a></li>
+                <li><a href="/employee-account-update">Ustawienia konta</a></li>
                 <li><a href="/">Wyloguj</a></li>
-
-
             </ul>
         </nav>
-        <img src="main/menu.png" alt="menu" class="menuic"
+        <img src="employee/menu.png" alt="menu" class="menuic"
              onclick="togglemenu()">
     </div>
     <div class="row">
         <div class="col-1">
-            <h2 id="user-id">khjlkjh</h2>
+            <h2 id="user-id"></h2>
             <br>
-            <h3 id="first-name">j,hlkj</h3>
+            <h3 id="first-name"></h3>
             <br>
-            <h3 id="last-name">khlkjh</h3>
+            <h3 id="last-name"></h3>
             <br>
         </div>
         <div class="col-2">
-            <img src="main/QR.png" class="qr">
+            <img id="qrCode" class="qr">
         </div>
     </div>
 
 </div>
+
+</body>
 <script>
         var menuList = document.getElementById("menuList");
         menuList.style.maxHeight = "0px";
@@ -54,9 +54,7 @@
             }
         }
 
-
-
-        let getEmployeeList = () => {
+        let getEmployeeList = async () => {
             return fetch('auth/employee', {
                 method: "GET",
                 headers: {'Content-Type': 'application/json'}
@@ -65,14 +63,38 @@
                document.getElementById("user-id").innerText = "ID: " + response2.id;
                document.getElementById("first-name").innerText = "First name: " + response2.firstName;
                document.getElementById("last-name").innerText = "Last name: " + response2.lastName;
-               console.log(document.getElementById("last-name").innerText);
+               return response2.id;
             })
         }
 
-        let employeeList = getEmployeeList().then(r => r);
+       getEmployeeList().then(r => {
+       const url = "/qr/" + r;
+            downloadImage(url);
+       });
 
-        setTimeout(10);
+        const fetchImage = async url => {
+            const response = await fetch(url)
+            const blob = await response.blob()
+            return blob
+        }
+
+        const downloadImage = async url => {
+            const imageBlob = await fetchImage(url)
+
+            const imageBase64 = URL.createObjectURL(imageBlob)
+            document.getElementById("qrCode").src = imageBase64;
+        }
+
+        const refresh = () => {
+         getEmployeeList().then(id => {
+           const url = "/refreshQr/" + id;
+           refreshQr(url);
+           });
+         }
+
+        const refreshQr = async url => {
+            const response = await fetch(url)
+        }
 
 </script>
-</body>
 </html>

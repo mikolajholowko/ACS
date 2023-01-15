@@ -36,6 +36,7 @@ public class Room {
     private String roomName;
     private boolean active;
     private int roomNumber;
+    private int roomAccessibility;
     @JsonIgnore
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
     Set<Entrance> entrances;
@@ -56,6 +57,7 @@ public class Room {
         room.setId(roomDto.getId());
         room.setRoomNumber(roomDto.getRoomNumber());
         room.setActive(roomDto.isActive());
+        room.setRoomAccessibility(roomDto.getRoomAccessibility());
         return room;
     }
 }

@@ -4,27 +4,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <title>QR</title>
-    <link rel="stylesheet" href="main/style.css">
+    <link rel="stylesheet" href="admin/style.css">
 </head>
 <body>
 
 
 <div class="containter">
     <div class="navbar">
-        <img src="main/logo.png" alt="logo" class="logo">
+        <img src="admin/logo.png" alt="logo" class="logo">
         <nav>
             <ul id="menuList">
                 <input type="button" id="refresh-qr" onclick="refresh(); window.location.reload();" value="Refresh QR">
-                <li><a href="/admin">QR Code</a></li>
-                <li><a href="availablerooms">Dostępne pomieszczenia</a></li>
-                <li><a href="/createaccount">Utwórz konto</a></li>
-                <li><a href="/accountupdate">Ustawienia konta</a></li>
+                <li><a href="/admin-available-rooms">Dostępne pomieszczenia</a></li>
+                <li><a href="/admin-create-account">Utwórz konto</a></li>
+                <li><a href="/admin-account-update">Ustawienia konta</a></li>
                 <li><a href="/">Wyloguj</a></li>
-
-
             </ul>
         </nav>
-        <img src="main/menu.png" alt="menu" class="menuic"
+        <img src="admin/menu.png" alt="menu" class="menuic"
              onclick="togglemenu()">
     </div>
     <div class="row">
@@ -99,10 +96,6 @@
         const refreshQr = async url => {
             const response = await fetch(url)
         }
-
-
-
-
 
 </script>
 </html>
