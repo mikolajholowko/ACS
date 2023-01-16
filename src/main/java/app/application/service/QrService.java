@@ -6,9 +6,7 @@ import app.application.model.Employee;
 import app.application.model.Entrance;
 import app.application.model.Qr;
 import app.application.model.Room;
-import app.application.model.dto.EmployeeDto;
-import app.application.model.dto.QrDto;
-import app.application.model.dto.Role;
+import app.application.model.dto.*;
 import app.application.repository.EmployeeRepository;
 import app.application.repository.EntranceRepository;
 import app.application.repository.QrRespository;
@@ -129,27 +127,26 @@ public class QrService {
         return qr;
     }
 
-    //TODO return proper object instead of just int
-    public int qrValidation(QrDto qrDto) {
+    public ValidationResultDto qrValidation(QrDto qrDto) {
         boolean isValidCode = getDateTimeFromTimestamp(qrDto.getTimestamp()).isBefore(LocalDateTime.now().minusDays(1));
         if (isValidCode) {
             EmployeeDto employeeDto = Employee.mapToDto(employeeRepository.findById(qrDto.getEmployeeId())
                     .orElseThrow(() -> new ACSException("User with id: " + qrDto.getEmployeeId() + " does not found!")));
-            if (employeeDto.getId() == qrDto.getEmployeeId()) {
-                if (qrDto.getRole().getValue() >= employeeDto.getRole().getValue()) {
-                    Optional<Room> first = roomRepository.findAll().stream().filter(e -> e.getRoomName().equals(qrDto.getRoomNumber())).findFirst();
-                    entranceRepository.save(new Entrance(LocalDateTime.now(), LocalDateTime.now(), Employee.mapToEntity(employeeDto), first.get()));
-                    return 200;
-                } else {
-                    return 401;
-                }
+            Room room = roomRepository.findAll().stream()
+                    .filter(e -> e.getRoomName().equals(qrDto.getRoomNumber()))
+                    .findFirst()
+                    .orElseThrow(() -> new ACSException("Room with number: " + qrDto.getRoomNumber() + " does not found!"));
+            if (qrDto.getRole().getValue() >= room.getRoomAccessibility()) {
+                entranceRepository.save(new Entrance(LocalDateTime.now(), LocalDateTime.now(), Employee.mapToEntity(employeeDto), room));
+                return new ValidationResultDto(200, buildEmployeeValidationResultDependedOnStatus(200, qrDto));
             } else {
-                return 404;
+                return new ValidationResultDto(401, buildEmployeeValidationResultDependedOnStatus(200, qrDto));
             }
         } else {
-            return 404;
+            return new ValidationResultDto(404, buildEmployeeValidationResultDependedOnStatus(200, qrDto));
         }
     }
+
 
     private LocalDateTime getDateTimeFromTimestamp(long timestamp) {
         if (timestamp == 0)
@@ -157,4 +154,26 @@ public class QrService {
         return LocalDateTime.ofInstant(Instant.ofEpochSecond(timestamp), TimeZone
                 .getDefault().toZoneId());
     }
+
+    EmployeeValidationResult buildEmployeeValidationResultDependedOnStatus(int status, QrDto qrDto) {
+
+        if (status == 200) {
+            return new EmployeeValidationResult(qrDto.getId(),
+                    qrDto.getRole(),
+                    "Dostęp do pomieszczenia " + qrDto.getRoomNumber() + " nadany.");
+        } else if (status == 401) {
+            return new EmployeeValidationResult(qrDto.getId(),
+                    qrDto.getRole(),
+                    "Niewystarczające uprawnienia do nadania dostępu do pokoju o numerze" + qrDto.getRoomNumber() + ".");
+        } else {
+            return new EmployeeValidationResult(qrDto.getId(),
+                    qrDto.getRole(),
+                    "Kod QR wygasł.");
+
+        }
+
+
+    }
+
+
 }

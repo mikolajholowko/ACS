@@ -1,7 +1,9 @@
 package app.application.controller;
 
 import app.application.model.Qr;
+import app.application.model.dto.EmployeeValidationResult;
 import app.application.model.dto.QrDto;
+import app.application.model.dto.ValidationResultDto;
 import app.application.service.QrService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,17 +44,13 @@ public class QrController {
     }
 
     @GetMapping(value = "/validate-code")
-    public ResponseEntity<Integer> validateCode(@RequestBody QrDto qrDto) {
+    public ResponseEntity<EmployeeValidationResult> validateCode(@RequestBody QrDto qrDto) {
 
-        int i = qrService.qrValidation(qrDto);
+        ValidationResultDto validationResult = qrService.qrValidation(qrDto);
 
-        if (i == 200) {
-            log.info("Dostęp do pomieszczenia do użykownika o identyfikatorze {} został nadany.", qrDto.getEmployeeId());
-        } else {
-            log.info("Autoryzacja dla pracownika o identyfikatorze {} nieudana.", qrDto.getEmployeeId());
-        }
+        log.info(validationResult.getEmployeeValidationResult().toString());
 
-        return ResponseEntity.status(qrService.qrValidation(qrDto)).body(i);
+        return ResponseEntity.status(validationResult.getStatusCode()).body(validationResult.getEmployeeValidationResult());
     }
 
     @GetMapping(value = "/refreshQr/{id}")
